@@ -24,13 +24,12 @@ public class UserDto {
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
                 .fullName(user.getFullName())
+                .email(user.getEmail())
                 .profilePicture(user.getProfilePicture())
                 .roleName(user.getRole() != null ? user.getRole().getName() : null)
-                .createdDate(user.getCreatedDate())
-                .status(user.getStatus())
+                .createdDate(user.getCreatedDate())  // Thêm createdDate nếu cần
+                .status(user.getStatus())  // Thêm status nếu cần
                 .build();
     }
 }
