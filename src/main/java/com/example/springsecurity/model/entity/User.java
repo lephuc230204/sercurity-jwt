@@ -31,7 +31,8 @@ public class User implements UserDetails {
     private String password;
     private String fullName;
     private String profilePicture;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Role_ID", nullable = false)
     private Role role;
     private LocalDate createdDate;
