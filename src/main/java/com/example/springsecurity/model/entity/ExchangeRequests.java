@@ -26,7 +26,7 @@ public class ExchangeRequests {
 
     @ManyToOne
     @JoinColumn(name = "BookID", nullable = false)
-    private Books book;
+    private Book book;
 
     private String requestStatus;
 
