@@ -15,14 +15,16 @@ import java.util.List;
 @Entity
 @Table(name = "Authors")
 public class Author {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long authorId;
+    private long id;
 
-    @Column(unique = true, nullable = false)
+    @Column( unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "author")
-    private List<Books> books;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books;
+    public Author(long id) {
+        this.id = id;
+    }
 }
