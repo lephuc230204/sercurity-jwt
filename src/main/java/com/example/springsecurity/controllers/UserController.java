@@ -1,9 +1,11 @@
 package com.example.springsecurity.controllers;
 
 
+import com.example.springsecurity.model.dto.BookDto;
 import com.example.springsecurity.model.dto.UserDto;
 import com.example.springsecurity.model.payload.ChangePasswordForm;
 import com.example.springsecurity.model.payload.UserForm;
+import com.example.springsecurity.service.BookService;
 import com.example.springsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+    @Autowired
+    private final BookService bookService;
 
     // Cập nhật thông tin cá nhân
     @PutMapping("/update/me")
@@ -36,5 +40,35 @@ public class UserController {
     public ResponseEntity<UserDto> getCurrentUser(Principal principal) { UserDto user = userService.getMe(principal);
         return ResponseEntity.ok(user);
     }
+    // thêm sách
+    @PostMapping("/book/add-new-book")
+    public ResponseEntity<BookDto> createBook(@RequestBody BookDto request) {
+        return ResponseEntity.ok(bookService.createBook(request));
+    }
 
+    // Lấy thông tin sách theo ID
+    @GetMapping("/book/{id}")
+    public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(bookService.getBookById(id));
+    }
+
+    // Lấy danh sách tất cả sách
+
+    @GetMapping("/book")
+    public ResponseEntity<List<BookDto>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
+    }
+
+    // Cập nhật thông tin sách
+    @PutMapping("/book/update-book/{id}")
+    public ResponseEntity<BookDto> updateBook(@PathVariable("id") Long id, @RequestBody BookDto request) {
+        return ResponseEntity.ok(bookService.updateBook(id, request));
+    }
+
+    // Xóa sách theo ID
+    @DeleteMapping("/book/delete-book/{id}")
+    String deleteBook(@PathVariable("id") Long id) {
+        bookService.deleteBook(id);
+        return "Book deleted";
+    }
 }

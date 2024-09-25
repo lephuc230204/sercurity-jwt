@@ -37,7 +37,8 @@ public class User implements UserDetails {
     private Role role;
     private LocalDate createdDate;
     private String status;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Assuming Role has a method getRoleName which returns role names
