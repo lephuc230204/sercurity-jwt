@@ -15,14 +15,13 @@ import java.util.List;
 @Entity
 @Table(name = "Categories")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
-
-    @Column(unique = true, nullable = false)
+    private long id;
     private String categoryName;
-
-    @OneToMany(mappedBy = "category")
-    private List<Books> books;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Book> books;
+    public Category(long id) {
+        this.id = id;
+    }
 }
