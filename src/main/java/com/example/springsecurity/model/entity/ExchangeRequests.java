@@ -28,9 +28,16 @@ public class ExchangeRequests {
     @JoinColumn(name = "BookID", nullable = false)
     private Book book;
 
-    private String requestStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private RequestStatus requestStatus;
 
     private LocalDate requestDate;
 
     private LocalDate exchangeDate;
+
+    // Enum for status
+    public enum RequestStatus {
+        PENDING, APPROVED, REJECTED, CANCELLED
+    }
 }
