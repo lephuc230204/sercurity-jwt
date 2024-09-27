@@ -1,6 +1,7 @@
 package com.example.springsecurity.service.impl;
 
 import com.example.springsecurity.model.dto.BookDto;
+import com.example.springsecurity.model.dto.UserDto;
 import com.example.springsecurity.model.entity.Author;
 import com.example.springsecurity.model.entity.Book;
 import com.example.springsecurity.model.entity.Category;
@@ -94,5 +95,9 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("Book with ID " + id + " not found.");
         }
         bookRepository.deleteById(id);
+    }
+
+    public List<Book> findBooksByUser(User user) {
+        return bookRepository.findByUser(user);
     }
 }
